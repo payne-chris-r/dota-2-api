@@ -16,3 +16,23 @@
 #                password: 'abc123',
 #                password_confirmation: nil)
 # end
+
+games = Game.create(
+  [
+    {
+      duration: '34:30',
+      skill_bracket: 'High',
+      game_type: 'Captains Mode'
+    },
+    {
+      duration: '34:30',
+      skill_bracket: 'High',
+      game_type: 'All Pick'
+    },
+    {
+      duration: '34:30',
+      skill_bracket: 'Normal',
+      game_type: 'All Random'
+    }
+  ]
+)
