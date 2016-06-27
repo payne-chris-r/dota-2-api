@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160327214720) do
+ActiveRecord::Schema.define(version: 20160627174252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "characters", force: :cascade do |t|
+    t.string   "name"
+    t.string   "base_stat"
+    t.boolean  "ranged"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "examples", force: :cascade do |t|
     t.text     "text",       null: false
@@ -24,6 +32,43 @@ ActiveRecord::Schema.define(version: 20160327214720) do
   end
 
   add_index "examples", ["user_id"], name: "index_examples_on_user_id", using: :btree
+
+  create_table "games", force: :cascade do |t|
+    t.string   "duration"
+    t.string   "skill_bracket"
+    t.string   "game_type"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.integer  "profile_id",   null: false
+    t.integer  "game_id",      null: false
+    t.string   "hero_picked"
+    t.integer  "kills"
+    t.integer  "deaths"
+    t.integer  "assists"
+    t.string   "side"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "character_id", null: false
+  end
+
+  add_index "players", ["character_id"], name: "index_players_on_character_id", using: :btree
+  add_index "players", ["game_id"], name: "index_players_on_game_id", using: :btree
+  add_index "players", ["profile_id"], name: "index_players_on_profile_id", using: :btree
+
+  create_table "profiles", force: :cascade do |t|
+    t.integer  "user_id",     null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "nationality"
+    t.integer  "ranking"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",           null: false
@@ -37,4 +82,8 @@ ActiveRecord::Schema.define(version: 20160327214720) do
   add_index "users", ["token"], name: "index_users_on_token", unique: true, using: :btree
 
   add_foreign_key "examples", "users"
+  add_foreign_key "players", "characters"
+  add_foreign_key "players", "games"
+  add_foreign_key "players", "profiles"
+  add_foreign_key "profiles", "users"
 end
