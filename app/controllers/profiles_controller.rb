@@ -1,4 +1,4 @@
-class ProfilesController < ApplicationController
+class ProfilesController < ProtectedController
   before_action :set_profile, only: [:show, :update, :destroy]
 
   # GET /profiles
@@ -18,14 +18,35 @@ class ProfilesController < ApplicationController
   # POST /profiles
   # POST /profiles.json
   def create
-    @profile = Profile.new(profile_params)
-
-    if @profile.save
-      render json: @profile, status: :created, location: @profile
+    if current_user.profile
+      @profile = current_user.profile
+      render json: {
+        status: 500,
+        message: 'Profile already exists',
+        profile: @profile
+      }.to_json
     else
-      render json: @profile.errors, status: :unprocessable_entity
+      @profile = current_user.build_profile(profile_params)
+      if @profile.save
+        render json: @profile, status: :created, location: @profile
+      else
+        render json: @profile.errors, status: :unprocessable_entity
+      end
     end
   end
+  #
+  # def create
+  #   @profile = Profile.new(profile_params)
+  #   @profile.user_id = current_user.id
+
+  # #   @profile.user_id=(current_user)
+
+  #   if @profile.save
+  #     render json: @profile, status: :created, location: @profile
+  #   else
+  #     render json: @profile.errors, status: :unprocessable_entity
+  #   end
+  # end
 
   # PATCH/PUT /profiles/1
   # PATCH/PUT /profiles/1.json
@@ -54,6 +75,6 @@ class ProfilesController < ApplicationController
     end
 
     def profile_params
-      params.require(:profile).permit(:user_id)
+      params.require(:profile).permit(:first_name, :last_name, :nationality)
     end
 end
