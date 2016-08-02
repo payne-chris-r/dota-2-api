@@ -1,4 +1,5 @@
-class ProfilesController < ProtectedController
+# class ProfilesController < ProtectedController
+class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :update, :destroy]
 
   # GET /profiles
@@ -17,43 +18,31 @@ class ProfilesController < ProtectedController
 
   # POST /profiles
   # POST /profiles.json
+  # def create
+  #   @profile = current_user.build_profile(profile_params)
+  #   unless current_user.profile
+  #     if @profile.save
+  #       render json: @profile, status: :created, location: @profile
+  #     else
+  #       render json: @profile.errors, status: :unprocessable_entity
+  #     end
+  # end
+  #
   def create
-    if current_user.profile
-      @profile = current_user.profile
-      render json: {
-        status: 500,
-        message: 'Profile already exists',
-        profile: @profile
-      }.to_json
+    @profile = Profile.new(profile_params)
+    current_user.profile = @profile
+
+    if @profile.save
+      render json: @profile, status: :created, location: @profile
     else
-      @profile = current_user.build_profile(profile_params)
-      if @profile.save
-        render json: @profile, status: :created, location: @profile
-      else
-        render json: @profile.errors, status: :unprocessable_entity
-      end
+      render json: @profile.errors, status: :unprocessable_entity
     end
   end
-  #
-  # def create
-  #   @profile = Profile.new(profile_params)
-  #   @profile.user_id = current_user.id
-
-  # #   @profile.user_id=(current_user)
-
-  #   if @profile.save
-  #     render json: @profile, status: :created, location: @profile
-  #   else
-  #     render json: @profile.errors, status: :unprocessable_entity
-  #   end
-  # end
 
   # PATCH/PUT /profiles/1
   # PATCH/PUT /profiles/1.json
   def update
-    @profile = Profile.find(params[:id])
-
-    if @profile.update(profile_params)
+    if current_user.profile == @profile && @profile.update(profile_params)
       head :no_content
     else
       render json: @profile.errors, status: :unprocessable_entity
@@ -63,18 +52,22 @@ class ProfilesController < ProtectedController
   # DELETE /profiles/1
   # DELETE /profiles/1.json
   def destroy
-    @profile.destroy
-
-    head :no_content
+    if current_user.profile == @profile
+      @profile.destroy
+      head :no_content
+    else
+      render json: @profile.errors, status: :unprocessable_entity
+    end
   end
 
   private
 
-    def set_profile
-      @profile = Profile.find(params[:id])
-    end
+  def set_profile
+    @profile = Profile.find(params[:id])
+    # @profile = current_user.profile
+  end
 
-    def profile_params
-      params.require(:profile).permit(:first_name, :last_name, :nationality)
-    end
+  def profile_params
+    params.require(:profile).permit(:first_name, :last_name, :nationality)
+  end
 end

@@ -7,6 +7,10 @@ class CreateProfiles < ActiveRecord::Migration
       t.string :last_name
       t.string :nationality
       t.integer :ranking
+      t.string :language
+      t.integer :reports
+      t.integer :abandons
+      t.string :positions, array: true
 
       t.timestamps null: false
     end

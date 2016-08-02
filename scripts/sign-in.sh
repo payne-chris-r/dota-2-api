@@ -9,13 +9,13 @@ curl --include --request POST http://localhost:3000/sign-in \
     }
   }'
 
-curl --include --request POST http://localhost:3000/profiles \
-  --header "Authorization: Token token=BAhJIiU2MjJmNTcxOTM3ZGUzYmJmYzA2OTJjMWQ4Y2YxOGFkNwY6BkVG--ddcef383e44f5f65861a25910d4f9ce724f2d008" \
+curl --include --request PATCH http://localhost:3000/profiles \
+  --header "Authorization: Token token=BAhJIiU3N2FlOTM4Nzc0YTVlY2YzYzdlNGI4NmM2YzE5OWQxYQY6BkVG--2ebf23c4e5eb840cfa1335d335d3e3f414164313" \
   --header "Content-Type: application/json" \
   --data '{
     "profile": {
-      "first_name": "Chris",
-      "last_name": "Payne",
+      "first_name": "Steve",
+      "last_name": "Brian",
       "nationality": "USA"
     }
   }'
