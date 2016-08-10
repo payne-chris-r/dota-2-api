@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :admins, except: [:new, :edit]
   resources :characters, except: [:new, :edit]
   resources :heroes, except: [:new, :edit]
   resources :players, except: [:new, :edit]
