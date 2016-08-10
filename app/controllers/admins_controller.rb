@@ -19,13 +19,23 @@ class AdminsController < ProtectedController
   # POST /admins
   # POST /admins.json
   def create
-    @admin = Admin.new(admin_params) if current_user.admin
-    # @admin.created_by = current_user.id
-    if @admin.save
-      render json: @admin, status: :created, location: @admin
-    else
-      render json: @admin.errors, status: :unprocessable_entity
-    end
+    # why doesn't current_user.admin work? Is it because admin hasOne user
+    # and not vice versa?
+    
+    # if current_user.admin
+      @admin = Admin.new(admin_params)
+      p current_user
+      @admin.created_by = current_user.id
+      if @admin.save
+        render json: @admin, status: :created, location: @admin
+      else
+        render json: @admin.errors, status: :unprocessable_entity
+      end
+    # else
+      p "current user isn't an admin? "
+      p current_user
+      # head :unauthorized
+    # end
   end
 
   # PATCH/PUT /admins/1
