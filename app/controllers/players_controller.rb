@@ -1,4 +1,4 @@
-class PlayersController < ApplicationController
+class PlayersController < ProtectedController
   before_action :set_player, only: [:show, :update, :destroy]
 
   # GET /players
@@ -19,6 +19,7 @@ class PlayersController < ApplicationController
   # POST /players.json
   def create
     @player = Player.new(player_params)
+    @player.profile_id = current_user.profile.id
 
     if @player.save
       render json: @player, status: :created, location: @player
@@ -31,7 +32,7 @@ class PlayersController < ApplicationController
   # PATCH/PUT /players/1.json
   def update
     @player = Player.find(params[:id])
-
+    @player.profile_id = current_user.profile_id
     if @player.update(player_params)
       head :no_content
     else
@@ -54,6 +55,6 @@ class PlayersController < ApplicationController
     end
 
     def player_params
-      params.require(:player).permit(:profile_id, :game_id, :character_id)
+      params.require(:player).permit(:game_id, :character_id)
     end
 end
