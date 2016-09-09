@@ -19,6 +19,11 @@ class PlayersController < ProtectedController
   # POST /players.json
   def create
     @player = Player.new(player_params)
+    # puts "Player is "
+    # puts @player
+    # @player.profile_id = current_user.profile_id
+    # p "player is now ", @player
+
     @player.profile_id = current_user.profile.id
 
     if @player.save
@@ -50,11 +55,11 @@ class PlayersController < ProtectedController
 
   private
 
-    def set_player
-      @player = Player.find(params[:id])
-    end
+  def set_player
+    @player = Player.find(params[:id])
+  end
 
-    def player_params
-      params.require(:player).permit(:game_id, :character_id)
-    end
+  def player_params
+    params.require(:player).permit(:game_id, :character_id)
+  end
 end

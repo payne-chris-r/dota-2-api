@@ -1,5 +1,4 @@
-# class ProfilesController < ProtectedController
-class ProfilesController < ApplicationController
+class ProfilesController < ProtectedController
   before_action :set_profile, only: [:show, :update, :destroy]
 
   # GET /profiles
@@ -18,19 +17,10 @@ class ProfilesController < ApplicationController
 
   # POST /profiles
   # POST /profiles.json
-  # def create
-  #   @profile = current_user.build_profile(profile_params)
-  #   unless current_user.profile
-  #     if @profile.save
-  #       render json: @profile, status: :created, location: @profile
-  #     else
-  #       render json: @profile.errors, status: :unprocessable_entity
-  #     end
-  # end
-  #
   def create
-    @profile = Profile.new(profile_params)
-    current_user.profile = @profile
+    # @profile = Profile.new(profile_params)
+    # @proflie.user_id = current_user.id
+    @profile = current_user.build_profile(profile_params)
 
     if @profile.save
       render json: @profile, status: :created, location: @profile
