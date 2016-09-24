@@ -4,7 +4,11 @@ class ProfilesController < ProtectedController
   # GET /profiles
   # GET /profiles.json
   def index
-    @profiles = Profile.all
+    @profiles = if params[:user]
+                  Profile.find_by(user: params[:user])
+                else
+                  Profile.all
+                end
 
     render json: @profiles
   end
@@ -53,11 +57,14 @@ class ProfilesController < ProtectedController
   private
 
   def set_profile
-    @profile = Profile.find(params[:id])
-    # @profile = current_user.profile
+    # @profile = Profile.find(params[:id])
+    if current_user.id == profile_params[:user_id].to_i
+      @profile = current_user.profile
+    end
   end
 
   def profile_params
-    params.require(:profile).permit(:first_name, :last_name, :nationality)
+    params.require(:profile)
+          .permit(:first_name, :last_name, :nationality, :user_id)
   end
 end
