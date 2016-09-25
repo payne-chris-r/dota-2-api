@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   # Profiles Custom Routes
   # patch '/profiles' => 'profiles#update'
   # get '/profiles' => 'profiles#show'
+
+  
   resources :profiles, except: [:new, :edit]
 
   resources :games, except: [:new, :edit]

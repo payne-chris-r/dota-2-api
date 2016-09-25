@@ -12,3 +12,14 @@ curl --include --request POST http://localhost:3000/profiles \
       "nationality": "USA"
     }
   }'
+
+  curl --include --request POST http://localhost:3000/profiles \
+    --header "Authorization: Token token=BAhJIiVjYWQ3NTgzY2QxMDljZmNiYjM2NWNmZjViZDA0ZWJjYwY6BkVG--2008518766e17fd637998de616d92bd7db4c5443" \
+    --header "Content-Type: application/json" \
+    --data '{
+      "profile": {
+        "first_name": "Bobby",
+        "last_name": "Nicko",
+        "nationality": "USA"
+      }
+    }'

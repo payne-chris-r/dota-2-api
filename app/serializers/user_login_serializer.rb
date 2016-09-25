@@ -1,8 +1,8 @@
 #
 class UserLoginSerializer < ActiveModel::Serializer
-  attributes :id, :email, :token, :profile
+  attributes :id, :email, :token, :profile_id
 
-  def profile
+  def profile_id
     object.profile.id if object.profile
   end
 
