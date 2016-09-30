@@ -3,13 +3,14 @@
 curl --include --request GET http://localhost:3000/games
 
 # join game
-curl --include --request POST http://localhost:3000/players \
-  --header "Authorization: Token token=BAhJIiUwOWI2NTFmZWQyYjc0ZWFiNGM1NzM0MmY4OTU0OGM2OAY6BkVG--a9a081dd7d2d0c4881d829703054840f6cb3ad51" \
+curl --include --request POST http://localhost:3000/games \
+  --header "Authorization: Token token=BAhJIiU0ZDRkMDQwZGI2YWExNWE4ZDNjZmE3ODMzMjJhZGYyNgY6BkVG--9034fa845eafa9ba0b5bfb13d503fcd580f15e0c" \
   --header "Content-Type: application/json" \
   --data '{
-    "player": {
-      "game_id": 3,
-      "character_id": 3
+    "game": {
+      "duration": 2,
+      "skill_bracket": 2,
+      "game_type": 2
     }
   }'
 
