@@ -54,6 +54,6 @@ class GamesController < ApplicationController
     end
 
     def game_params
-      params[:game]
+      params.require(:game).permit(:duration, :skill_bracket, :game_type)
     end
 end
