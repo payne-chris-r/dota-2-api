@@ -1,13 +1,13 @@
 class Game < ActiveRecord::Base
+  validate :open?
   has_many :players, inverse_of: :game
   has_many :profiles, through: :players
 
-  def full?
-    p "players.length is", players.length
+  def open?
     if players.length >= 4
-      true
-    else
       false
+    else
+      true
     end
   end
 end

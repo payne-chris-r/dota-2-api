@@ -1,7 +1,11 @@
 class GameSerializer < ActiveModel::Serializer
-  attributes :id, :players, :full?
+  attributes :id, :profiles, :open
 
-  def players
-    object.players.pluck(:id)
+  def profiles
+    object.profiles.pluck(:id)
+  end
+
+  def open
+    object.open?
   end
 end
