@@ -3,6 +3,8 @@ class Game < ActiveRecord::Base
   has_many :players, inverse_of: :game
   has_many :profiles, through: :players
 
+  validates :players, length: { maximum: 4, message: 'Game is full' }
+
   def open?
     if players.length >= 4
       false
