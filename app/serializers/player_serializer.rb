@@ -1,6 +1,6 @@
 #player Serializer
 class PlayerSerializer < ActiveModel::Serializer
-  attributes :id, :profile, :game
+  attributes :id, :profile, :game, :kills
 
   def profile
     object.profile.id

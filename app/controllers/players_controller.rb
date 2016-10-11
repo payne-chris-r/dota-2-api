@@ -4,8 +4,12 @@ class PlayersController < ProtectedController
   # GET /players
   # GET /players.json
   def index
-    @players = Player.all
-
+    @players = if params[:game_id] && params[:profile_id]
+                 Player.where(game_id: params[:game_id],
+                              profile_id: params[:profile_id])
+               else
+                 @players = Player.all
+               end
     render json: @players
   end
 
@@ -24,9 +28,10 @@ class PlayersController < ProtectedController
     # @player.profile_id = current_user.profile_id
     # p "player is now ", @player
 
-    @player.profile_id = current_user.profile.id
+    @player.profile = current_user.profile if current_user.profile
+    # what if a user doesn't have a profile!? ^^^^^ guard
 
-    if @player.save
+    if current_user.profile && @player.save
       render json: @player, status: :created, location: @player
     else
       render json: @player.errors, status: :unprocessable_entity
@@ -60,6 +65,6 @@ class PlayersController < ProtectedController
   end
 
   def player_params
-    params.require(:player).permit(:game_id, :character_id)
+    params.require(:player).permit(:game_id, :character_id, :kills)
   end
 end
