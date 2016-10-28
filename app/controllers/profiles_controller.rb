@@ -65,6 +65,7 @@ class ProfilesController < OpenReadController
 
   def profile_params
     params.require(:profile)
-          .permit(:first_name, :last_name, :nationality, :user_id)
+          .permit(:first_name, :last_name, :nationality, :language, :abandons,
+                  :reports, :ranking, :user_id)
   end
 end
