@@ -1,6 +1,7 @@
 class ProfileSerializer < ActiveModel::Serializer
   attributes :id, :first_name, :last_name, :nationality, :ranking,
-             :positions, :players, :user
+             :carry, :support, :mid, :offlaner, :jungler, :roamer,
+             :players, :user
 
   def players
     object.players.pluck(:id)

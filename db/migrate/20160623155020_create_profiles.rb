@@ -10,7 +10,14 @@ class CreateProfiles < ActiveRecord::Migration
       t.string :language
       t.integer :reports
       t.integer :abandons
-      t.string :positions, array: true
+      # t.boolean :positions, array: true,
+      #                       default: [false,false,false,false,false]
+      t.boolean :carry
+      t.boolean :support
+      t.boolean :roamer
+      t.boolean :mid
+      t.boolean :offlaner
+      t.boolean :jungler
 
       t.timestamps null: false
     end

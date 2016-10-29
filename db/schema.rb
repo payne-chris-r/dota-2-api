@@ -76,7 +76,12 @@ ActiveRecord::Schema.define(version: 20160810022145) do
     t.string   "language"
     t.integer  "reports"
     t.integer  "abandons"
-    t.string   "positions",                array: true
+    t.boolean  "carry"
+    t.boolean  "support"
+    t.boolean  "roamer"
+    t.boolean  "mid"
+    t.boolean  "offlaner"
+    t.boolean  "jungler"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
