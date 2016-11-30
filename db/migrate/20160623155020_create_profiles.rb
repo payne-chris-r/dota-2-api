@@ -12,12 +12,12 @@ class CreateProfiles < ActiveRecord::Migration
       t.integer :abandons
       # t.boolean :positions, array: true,
       #                       default: [false,false,false,false,false]
-      t.boolean :carry
-      t.boolean :support
-      t.boolean :roamer
-      t.boolean :mid
-      t.boolean :offlaner
-      t.boolean :jungler
+      t.integer :carry
+      t.integer :support
+      t.integer :roamer
+      t.integer :mid
+      t.integer :offlaner
+      t.integer :jungler
 
       t.timestamps null: false
     end

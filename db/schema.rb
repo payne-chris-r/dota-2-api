@@ -76,12 +76,12 @@ ActiveRecord::Schema.define(version: 20160810022145) do
     t.string   "language"
     t.integer  "reports"
     t.integer  "abandons"
-    t.boolean  "carry"
-    t.boolean  "support"
-    t.boolean  "roamer"
-    t.boolean  "mid"
-    t.boolean  "offlaner"
-    t.boolean  "jungler"
+    t.integer  "carry"
+    t.integer  "support"
+    t.integer  "roamer"
+    t.integer  "mid"
+    t.integer  "offlaner"
+    t.integer  "jungler"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
