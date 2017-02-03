@@ -1,6 +1,6 @@
 class Player < ActiveRecord::Base
   include ActiveModel::Validations
-  validates_with GameValidator
+  # validates_with GameValidator
 
   belongs_to :profile, inverse_of: :players
   belongs_to :game, inverse_of: :players

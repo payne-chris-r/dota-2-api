@@ -5,13 +5,13 @@ curl --include --request GET http://localhost:3000/players \
   --header "Content-Type: application/json"
 
 curl --include --request POST http://localhost:3000/players \
-  --header "Authorization: Token token=BAhJIiUzYjk0ZjgwMzQxMzI4OWMzNmY4MmEwMDMzZjQzMjY3MwY6BkVG--9e72b7af0e27cf110798506aeb15e498c211a34d" \
+  --header "Authorization: Token token=BAhJIiU1OGRkYzRhNmExNjYyOTViNzgwMGE2MWNhZjc3MTZkNgY6BkVG--cbbb8eec0f3f16dd491be3b72bbeffefbe37a5d3" \
   --header "Content-Type: application/json" \
   --data '{
     "player": {
-      "game_id": 3,
-      "profile_id": 10,
-      "character_id": 3
+      "game_id": 1,
+      "profile_id": 2,
+      "character_id": 4
     }
   }'
 

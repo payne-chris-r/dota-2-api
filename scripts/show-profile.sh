@@ -1,14 +1,14 @@
-curl --include --request GET http://localhost:3000/profiles/5 \
-  --header "Authorization: Token token=BAhJIiUwNWNjNGU2MWI4OWFmOWJmYjE4ZWJiOGI2NjlkMzNlNAY6BkVG" \
+curl --include --request GET http://localhost:3000/profiles/2 \
+  --header "Authorization: Token token=BAhJIiU1OTI5OTM0M2FlZTM4MDYwNjk5MzdiM2E3NDY1MjEwYgY6BkVG--70fc183c3a628cd81136bd48042f7f94e21cb03b" \
   --header "Content-Type: application/json"
 
 curl --include --request POST http://localhost:3000/profiles \
-  --header "Authorization: Token token=BAhJIiVjMGM4YzU0N2VmMGM5MWZkMzUyYmFhMWRkMzEzMmVjNwY6BkVG--bf44a69b7a105d684ab3d335b5fa5efaef5c5234" \
+  --header "Authorization: Token token=BAhJIiVlY2M5YjliZWE1YTVlYTJiMmRkOTVhY2UyY2NkYTQzYgY6BkVG--4ca61875fb0fab02ca57079115109749cb89b645" \
   --header "Content-Type: application/json" \
   --data '{
     "profile": {
-      "first_name": "B Reezy",
-      "last_name": "My Neezy",
+      "first_name": "Yo",
+      "last_name": "Yo",
       "nationality": "USA",
       "abandons": 23,
       "reports": 12,

@@ -1,7 +1,10 @@
 class Game < ActiveRecord::Base
   validate :open?
+
   has_many :players, inverse_of: :game
   has_many :profiles, through: :players
+
+  has_many :comments, as: :commentable
 
   validates :players, length: { maximum: 4 }
 
